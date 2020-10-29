@@ -18,11 +18,12 @@ class Menu extends Component {
       rname: name,
     };
 
+    axios.defaults.headers.common.authorization = localStorage.getItem('token');
     axios.post('http://localhost:3001/restaurant/menu', data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
-          // console.log(response.data);
+          console.log(response.data);
           this.setState({
             res: response.data,
           });

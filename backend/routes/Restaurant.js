@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const { secret } = require('../Utils/config');
 const Customers = require('../Models/CustomerModel');
 const Restaurants = require('../Models/RestaurantModel');
-const { auth } = require('../Utils/passport');
+const { auth, checkAuth } = require('../Utils/passport');
 
 auth();
 
@@ -118,12 +118,13 @@ router.post('/addmenuitem', (req, res) => {
   });
 });
 
-router.post('/menu', (req, res) => {
+router.post('/menu', checkAuth, (req, res) => {
   const data = [];
   Restaurants.find({ name: req.body.rname }).exec((error, customer) => {
     if (error) {
       console.log(error);
     }
+    console.log(customer);
     customer.forEach((item) => {
       item.menu.forEach((thing) => {
         data.push(thing);

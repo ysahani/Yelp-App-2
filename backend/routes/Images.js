@@ -32,4 +32,15 @@ router.post('/getcustomerurl', (req, res) => {
   });
 });
 
+router.post('/dishurl', (req, res) => {
+  Restaurants.updateOne({ 'menu.dish_name': req.body.dish_namez }, { $set: { 'menu.$.url': req.body.url } }).exec((error, customer) => {
+    if (error) {
+      console.log(error);
+      res.status(202).end('Error Occured');
+    }
+    console.log('Dish URL set succesfully!');
+    res.status(200).end('Succesful update in order!');
+  });
+});
+
 module.exports = router;

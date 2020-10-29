@@ -126,7 +126,7 @@ class EditDish extends Component {
       url: this.props.url,
     };
     console.log(data.dish_namez);
-    axios.post('http://localhost:3001/dishurl', data)
+    axios.post('http://localhost:3001/images/dishurl', data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
