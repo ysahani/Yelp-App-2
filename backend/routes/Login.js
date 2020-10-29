@@ -5,8 +5,9 @@ const jwt = require('jsonwebtoken');
 const { secret } = require('../Utils/config');
 const Restaurants = require('../Models/RestaurantModel');
 const Customers = require('../Models/CustomerModel');
-// const { auth } = require("../utils/passport");
-// auth();
+const { auth } = require('../Utils/passport');
+
+auth();
 
 // Route to handle Post Request Call
 router.post('/login', (req, res) => {
@@ -16,7 +17,9 @@ router.post('/login', (req, res) => {
     }
     if (user) {
       console.log('Login Succesful!');
-      const payload = { _id: user._id };
+      const payload = {
+        _id: user._id, name: user.name, email: user.email, location: user.location, timings: user.timings, description: user.description, persona: 'restaurant',
+      };
       const token = jwt.sign(payload, secret, {
         expiresIn: 108000,
       });
@@ -34,7 +37,9 @@ router.post('/login', (req, res) => {
       // res.send({
       //   cname: user.name, email: user.email, yelpingSince: user.yelpingSince, thingsILove: user.thingsILove, findMeIn: user.findMeIn, blogsite: user.blogsite, dob: user.dob, city: user.city, state: user.state, country: user.country, nickname: user.nickname, phone: user.phone, persona: 'customer',
       // });
-      const payload = { _id: user._id };
+      const payload = {
+        _id: user._id, cname: user.name, email: user.email, yelpingSince: user.yelpingSince, thingsILove: user.thingsILove, findMeIn: user.findMeIn, blogsite: user.blogsite, dob: user.dob, city: user.city, state: user.state, country: user.country, nickname: user.nickname, phone: user.phone, persona: 'customer',
+      };
       const token = jwt.sign(payload, secret, {
         expiresIn: 108000,
       });

@@ -12,6 +12,7 @@
     "cookie-parser": "^1.4.5",
     "google-maps-react": "^2.0.6",
     "jwt-decode": "^3.0.0",
+    "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "react": "^16.13.1",
     "react-cookie": "^4.0.3",

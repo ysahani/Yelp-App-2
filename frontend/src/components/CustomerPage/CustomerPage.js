@@ -32,8 +32,8 @@ class CustomerPage extends Component {
           });
           const { url } = this.state;
           console.log('asdf');
-          // this.props.updateURL(response.data[0].url);
-          // console.log(`"${response.data[0].url}"`);
+          this.props.updateURL(response.data[0].url);
+          console.log(`"${response.data[0].url}"`);
           console.log('Post success in customerurl!');
         } else {
           console.log('Post error in customerurl!');

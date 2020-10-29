@@ -2,12 +2,13 @@ const { MarketplaceEntitlementService } = require('aws-sdk');
 const express = require('express');
 
 const router = express.Router();
-// const jwt = require('jsonwebtoken');
-// const { secret } = require('../Utils/config');
+const jwt = require('jsonwebtoken');
+const { secret } = require('../Utils/config');
 const Customers = require('../Models/CustomerModel');
 const Restaurants = require('../Models/RestaurantModel');
-// const { auth } = require("../utils/passport");
-// auth();
+const { auth } = require('../Utils/passport');
+
+auth();
 
 // Route to handle Post Request Call
 router.post('/updateprofile', (req, res) => {

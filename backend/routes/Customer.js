@@ -5,8 +5,9 @@ const router = express.Router();
 // const { secret } = require('../Utils/config');
 const Customers = require('../Models/CustomerModel');
 const Restaurants = require('../Models/RestaurantModel');
-// const { auth } = require("../utils/passport");
-// auth();
+const { auth, checkAuth } = require('../Utils/passport');
+
+auth();
 
 // Route to handle Post Request Call
 router.post('/updatecustomer', (req, res) => {
@@ -117,7 +118,7 @@ router.post('/showRegistered', (req, res) => {
   });
 });
 
-router.post('/customerpage', (req, res) => {
+router.post('/customerpage', checkAuth, (req, res) => {
   const data = [];
   Restaurants.find({}).exec((error, restaurant) => {
     if (error) {

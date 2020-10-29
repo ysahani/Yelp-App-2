@@ -65,30 +65,32 @@ class LogIn extends Component {
         this.setState({
           token: response.data,
         });
+        const { token } = this.state;
+        const decoded = jwtDecode(token.split(' ')[1]);
+
         console.log('THINGG');
-        console.log(this.state.token);
+        console.log(decoded.persona);
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
-          // this.setState({
-          //   restaurantName: response.data.rname,
-          //   location: response.data.location,
-          // });
-          // const { restaurantName } = this.state;
-          // const { location } = this.state;
-          this.props.history.push('/customerpage');
-          if (response.data.persona && response.data.persona === 'customer') {
+          this.setState({
+            restaurantName: decoded.name,
+            location: decoded.location,
+          });
+          const { restaurantName } = this.state;
+          const { location } = this.state;
+          if (decoded.persona === 'customer') {
             this.setState({
-              customerName: response.data.cname,
-              yelpingSince: response.data.yelpingSince,
-              thingsILove: response.data.thingsILove,
-              findMeIn: response.data.findMeIn,
-              blogSite: response.data.blogsite,
-              dob: response.data.dob,
-              city: response.data.city,
-              state: response.data.state,
-              country: response.data.country,
-              nickname: response.data.nickname,
-              phone: response.data.phone,
+              customerName: decoded.cname,
+              yelpingSince: decoded.yelpingSince,
+              thingsILove: decoded.thingsILove,
+              findMeIn: decoded.findMeIn,
+              blogSite: decoded.blogsite,
+              dob: decoded.dob,
+              city: decoded.city,
+              state: decoded.state,
+              country: decoded.country,
+              nickname: decoded.nickname,
+              phone: decoded.phone,
             });
             const { customerName } = this.state;
             const { yelpingSince } = this.state;
@@ -106,10 +108,10 @@ class LogIn extends Component {
             this.props.history.push('/customerpage');
           } else {
             this.setState({
-              restaurantName: response.data.r_name,
-              location: response.data.location,
-              description: response.data.description,
-              timings: response.data.timings,
+              restaurantName: decoded.r_name,
+              location: decoded.location,
+              description: decoded.description,
+              timings: decoded.timings,
             });
             const { restaurantName } = this.state;
             const { location } = this.state;
