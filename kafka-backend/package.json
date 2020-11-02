@@ -1,0 +1,36 @@
+{
+  "name": "kafka-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ysahani/lab-2.git"
+  },
+  "keywords": [
+    "node",
+    "npm"
+  ],
+  "author": "Yash Sahani",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.2"
+  },
+  "bugs": {
+    "url": "https://github.com/ysahani/lab-2/issues"
+  },
+  "homepage": "https://github.com/ysahani/lab-2#readme",
+  "dependencies": {
+    "kafka-node": "^5.0.0",
+    "mongoose": "^5.10.11"
+  }
+}

@@ -69,7 +69,7 @@ class LogIn extends Component {
         const decoded = jwtDecode(token.split(' ')[1]);
 
         console.log('THINGG');
-        console.log(decoded.name);
+        console.log(decoded.persona);
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
           this.setState({
@@ -104,7 +104,7 @@ class LogIn extends Component {
             const persona = 'Customer';
             this.props.loginCustomer(username, customerName, yelpingSince, thingsILove, findMeIn, blogSite, dob, city, state, country, nickname, phone, persona);
             this.props.history.push('/customerpage');
-          } else {
+          } else if (decoded.persona === 'restaurant') {
             this.setState({
               restaurantName: decoded.name,
               location: decoded.location,
@@ -117,6 +117,7 @@ class LogIn extends Component {
             const { timings } = this.state;
             const persona = 'Restaurant';
             this.props.logUserIn(username, restaurantName, location, description, timings, persona);
+            this.props.history.push('/restaurantpage');
           }
         } else {
           this.props.dontLogUserIn();
