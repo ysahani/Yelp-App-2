@@ -38,6 +38,7 @@ class CustomerOrders extends Component {
     const val = e.currentTarget.id;
     const data = {
       items: val,
+      name: this.props.name,
     };
     axios.post('http://localhost:3001/customer/cancelorder', data)
       .then((response) => {

@@ -56,26 +56,24 @@ router.post('/login', (req, res) => {
     if (err) {
       console.log('Login ERROR');
       res.status(202).end('Unsuccessful login!');
-    } else {
+    } else if ((results.yelpingSince !== null) && (results.yelpingSince || results.yelpingSince === '')) {
       console.log('Logged In!');
-      if (results.yelpingSince) {
-        const payload = {
-          _id: results._id, cname: results.name, email: results.email, yelpingSince: results.yelpingSince, thingsILove: results.thingsILove, findMeIn: results.findMeIn, blogsite: results.blogsite, dob: results.dob, city: results.city, state: results.state, country: results.country, nickname: results.nickname, phone: results.phone, persona: 'customer',
-        };
-        const token = jwt.sign(payload, secret, {
-          expiresIn: 108000,
-        });
-        res.status(200).end(`JWT ${token}`);
-      } else if (results.yelpingSince === undefined) {
-        console.log(results.yelpingSince);
-        const payload = {
-          _id: results._id, name: results.name, email: results.email, location: results.location, timings: results.timings, description: results.description, persona: 'restaurant',
-        };
-        const token = jwt.sign(payload, secret, {
-          expiresIn: 108000,
-        });
-        res.status(200).end(`JWT ${token}`);
-      }
+      const payload = {
+        _id: results._id, cname: results.name, email: results.email, yelpingSince: results.yelpingSince, thingsILove: results.thingsILove, findMeIn: results.findMeIn, blogsite: results.blogsite, dob: results.dob, city: results.city, state: results.state, country: results.country, nickname: results.nickname, phone: results.phone, persona: 'customer',
+      };
+      const token = jwt.sign(payload, secret, {
+        expiresIn: 108000,
+      });
+      res.status(200).end(`JWT ${token}`);
+    } else if (results.yelpingSince === undefined) {
+      console.log(results.yelpingSince);
+      const payload = {
+        _id: results._id, name: results.name, email: results.email, location: results.location, timings: results.timings, description: results.description, persona: 'restaurant',
+      };
+      const token = jwt.sign(payload, secret, {
+        expiresIn: 108000,
+      });
+      res.status(200).end(`JWT ${token}`);
     }
   });
 });

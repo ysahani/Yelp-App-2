@@ -1,14 +1,15 @@
-// const { MarketplaceEntitlementService } = require('aws-sdk');
-// const express = require('express');
+const { MarketplaceEntitlementService } = require('aws-sdk');
+const express = require('express');
+const kafka = require('../kafka/client');
 
-// const router = express.Router();
-// const jwt = require('jsonwebtoken');
-// const { secret } = require('../Utils/config');
+const router = express.Router();
+const jwt = require('jsonwebtoken');
+const { secret } = require('../Utils/config');
 // const Customers = require('../Models/CustomerModel');
 // const Restaurants = require('../Models/RestaurantModel');
-// const { auth, checkAuth } = require('../Utils/passport');
+const { auth, checkAuth } = require('../Utils/passport');
 
-// auth();
+auth();
 
 // // Route to handle Post Request Call
 // router.post('/updateprofile', (req, res) => {
@@ -133,6 +134,19 @@
 //     res.send(data);
 //   });
 // });
+
+router.post('/menu', checkAuth, (req, res) => {
+  const msg = req.body;
+  msg.route = 'menu';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log('ERROR in menu');
+      res.status(202).end('Error occured');
+    } else {
+      res.send(results);
+    }
+  });
+});
 
 // router.post('/restaurantorders', (req, res) => {
 //   const data = [];
@@ -278,4 +292,4 @@
 //     res.send(data);
 //   });
 // });
-// module.exports = router;
+module.exports = router;

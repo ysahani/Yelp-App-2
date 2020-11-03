@@ -95,7 +95,7 @@ class RestaurantProf extends Component {
         <div style={{ textAlign: 'center' }}>
           <h5 className="subtitle">
             <b>Restaurant Name</b>
-            <p>{res.r_name}</p>
+            <p>{res.name}</p>
           </h5>
           <h5 className="subtitle">
             <b>Location</b>

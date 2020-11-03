@@ -56,8 +56,8 @@ const Images = require('./routes/Images');
 
 app.use('/user', SignUp);
 app.use('/user', Login);
-// app.use('/restaurant', Restaurant);
-// app.use('/customer', Customer);
+app.use('/restaurant', Restaurant);
+app.use('/customer', Customer);
 // app.use('/images', Images);
 
 // start your server on port 3001

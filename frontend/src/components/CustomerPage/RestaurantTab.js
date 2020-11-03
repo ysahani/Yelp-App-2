@@ -18,13 +18,14 @@ class RestaurantTab extends Component {
     const data = {
       rname: rName,
     };
+    axios.defaults.headers.common.authorization = localStorage.getItem('token');
     axios.post('http://localhost:3001/restaurant/menu', data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
-          // console.log(response.data);
+          console.log(response.data[0].menu);
           this.setState({
-            res: response.data,
+            res: response.data[0].menu,
           });
           this.state.res.forEach((item) => {
             console.log(item.name);
