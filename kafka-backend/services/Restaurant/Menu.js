@@ -13,7 +13,7 @@ let menu = async (msg, callback) => {
         data.push(thing);
       });
     });
-    return callback(null, customer);
+    return callback(null, data);
   });
 }
 

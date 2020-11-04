@@ -25,7 +25,7 @@ class RestaurantTab extends Component {
         if (response.status === 200) {
           console.log(response.data[0].menu);
           this.setState({
-            res: response.data[0].menu,
+            res: response.data,
           });
           this.state.res.forEach((item) => {
             console.log(item.name);

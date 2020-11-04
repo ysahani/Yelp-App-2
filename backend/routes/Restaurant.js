@@ -31,6 +31,20 @@ auth();
 //   });
 // });
 
+router.post('/updateprofile', (req, res) => {
+  const msg = req.body;
+  msg.route = 'updateProfile';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error Occured');
+    } else {
+      console.log('Restaurant profile updated!');
+      res.status(200).end('Succesful');
+    }
+  });
+});
+
 // router.post('/addevent', (req, res) => {
 //   const myquery = { name: req.body.name };
 //   const newvalues = {
@@ -53,6 +67,20 @@ auth();
 //   });
 // });
 
+router.post('/addevent', (req, res) => {
+  const msg = req.body;
+  msg.route = 'addEvent';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error Occured');
+    } else {
+      console.log('Added event!');
+      res.status(200).end('Succesful');
+    }
+  });
+});
+
 // router.post('/restaurantevents', (req, res) => {
 //   const data = [];
 //   Restaurants.find({}).exec((error, restaurant) => {
@@ -71,6 +99,19 @@ auth();
 //   });
 // });
 
+router.post('/restaurantevents', (req, res) => {
+  const msg = req.body;
+  msg.route = 'restaurantEvents';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error Occured');
+    } else {
+      res.send(results);
+    }
+  });
+});
+
 // router.post('/registeredlist', (req, res) => {
 //   const data = [];
 //   Customers.find({}).exec((error, customer) => {
@@ -88,6 +129,19 @@ auth();
 //   });
 // });
 
+router.post('/registeredlist', (req, res) => {
+  const msg = req.body;
+  msg.route = 'registeredList';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error Occured');
+    } else {
+      res.send(results);
+    }
+  });
+});
+
 // router.post('/viewcustomer', (req, res) => {
 //   Customers.find({ name: req.body.cname }).exec((error, customer) => {
 //     if (error) {
@@ -97,6 +151,19 @@ auth();
 //     console.log(customer);
 //   });
 // });
+
+router.post('/viewcustomer', (req, res) => {
+  const msg = req.body;
+  msg.route = 'viewCustomer';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error Occured');
+    } else {
+      res.send(results);
+    }
+  });
+});
 
 // router.post('/addmenuitem', (req, res) => {
 //   const myquery = { name: req.body.rname };
@@ -118,6 +185,20 @@ auth();
 //     }
 //   });
 // });
+
+router.post('/addmenuitem', (req, res) => {
+  const msg = req.body;
+  msg.route = 'addMenuItem';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error Occured');
+    } else {
+      console.log('Added menu item!');
+      res.status(200).end('Success!');
+    }
+  });
+});
 
 // router.post('/menu', checkAuth, (req, res) => {
 //   const data = [];
@@ -166,6 +247,19 @@ router.post('/menu', checkAuth, (req, res) => {
 //   });
 // });
 
+router.post('/restaurantorders', (req, res) => {
+  const msg = req.body;
+  msg.route = 'restaurantOrders';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log('ERROR in menu');
+      res.status(202).end('Error occured');
+    } else {
+      res.send(results);
+    }
+  });
+});
+
 // router.post('/updateorder', (req, res) => {
 //   Customers.updateOne({ 'orders.items': req.body.items }, { $set: { 'orders.$.order_option': req.body.order_option } }).exec((error, customer) => {
 //     if (error) {
@@ -176,6 +270,19 @@ router.post('/menu', checkAuth, (req, res) => {
 //     res.status(200).end('Succesful update in order!');
 //   });
 // });
+
+router.post('/updateorder', (req, res) => {
+  const msg = req.body;
+  msg.route = 'updateOrder';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error occured');
+    } else {
+      res.status(200).end('Succesful update in order!');
+    }
+  });
+});
 
 // router.post('/filterorder', (req, res) => {
 //   const data = [];
@@ -242,6 +349,19 @@ router.post('/menu', checkAuth, (req, res) => {
 //   }
 // });
 
+router.post('/filterorder', (req, res) => {
+  const msg = req.body;
+  msg.route = 'filterOrder';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error occured');
+    } else {
+      res.send(results);
+    }
+  });
+});
+
 // router.post('/editdish', (req, res) => {
 //   const data = [];
 //   Restaurants.find({ 'menu.dish_name': req.body.dish_name }).exec((error, restaurant) => {
@@ -260,6 +380,19 @@ router.post('/menu', checkAuth, (req, res) => {
 //   });
 // });
 
+router.post('/editdish', (req, res) => {
+  const msg = req.body;
+  msg.route = 'editDish';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error occured');
+    } else {
+      res.send(results);
+    }
+  });
+});
+
 // router.post('/updatedish', (req, res) => {
 //   Restaurants.updateOne({ 'menu.dish_name': req.body.dname }, {
 //     $set: {
@@ -274,6 +407,19 @@ router.post('/menu', checkAuth, (req, res) => {
 //     res.status(200).end('Succesful update in order!');
 //   });
 // });
+
+router.post('/updatedish', (req, res) => {
+  const msg = req.body;
+  msg.route = 'updateDish';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error occured');
+    } else {
+      res.status(200).end('Succesful update in order!');
+    }
+  });
+});
 
 // router.post('/reviews', (req, res) => {
 //   const data = [];
@@ -292,4 +438,17 @@ router.post('/menu', checkAuth, (req, res) => {
 //     res.send(data);
 //   });
 // });
+
+router.post('/reviews', (req, res) => {
+  const msg = req.body;
+  msg.route = 'reviews';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error occured');
+    } else {
+      res.send(results);
+    }
+  });
+});
 module.exports = router;
