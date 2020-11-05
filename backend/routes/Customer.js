@@ -403,4 +403,45 @@ router.post('/cancelorder', (req, res) => {
   });
 });
 
+router.post('/getrecipients', (req, res) => {
+  const msg = req.body;
+  msg.route = 'getRecipients';
+  kafka.make_request('customer', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error Occured');
+    } else {
+      res.send(results);
+    }
+  });
+});
+
+router.post('/sendmessage', (req, res) => {
+  const msg = req.body;
+  msg.route = 'sendMessage';
+  kafka.make_request('customer', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error Occured');
+    } else {
+      console.log(results);
+      res.status(200).end('Succesful message sent!');
+    }
+  });
+});
+
+router.post('/getmessages', (req, res) => {
+  const msg = req.body;
+  msg.route = 'getMessages';
+  kafka.make_request('customer', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error Occured');
+    } else {
+      console.log(results);
+      res.send(results);
+    }
+  });
+});
+
 module.exports = router;

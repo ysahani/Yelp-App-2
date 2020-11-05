@@ -22,6 +22,12 @@ const orders = new Schema({
   real_datetime: String,
 });
 
+const messages = new Schema({
+  date_time: Date,
+  message: String,
+  rname: String,
+});
+
 const customerSchema = new Schema({
   email: String,
   name: String,
@@ -40,6 +46,7 @@ const customerSchema = new Schema({
   events: [events],
   reviews: [reviews],
   orders: [orders],
+  messages: [messages],
 },
 {
   versionKey: false,

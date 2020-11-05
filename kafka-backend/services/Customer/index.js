@@ -11,6 +11,9 @@ const { rProfReviews } = require("./RProfReviews");
 const { placeOrder } = require("./PlaceOrder");
 const { customerOrders } = require("./CustomerOrders");
 const { cancelOrder } = require("./CancelOrder");
+const { getRecipients } = require("./GetRecipients");
+const { sendMessage } = require("./SendMessage");
+const { getMessages } = require("./GetMessages");
 
 let handle_request = (msg, callback) => {
   switch (msg.route) {
@@ -49,6 +52,15 @@ let handle_request = (msg, callback) => {
       break;
     case "cancelOrder":
       cancelOrder(msg, callback);
+      break;
+    case "getRecipients":
+      getRecipients(msg, callback);
+      break;
+    case "sendMessage":
+      sendMessage(msg, callback);
+      break;
+    case "getMessages":
+      getMessages(msg, callback);
       break;
   }
 };

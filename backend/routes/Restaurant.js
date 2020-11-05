@@ -451,4 +451,33 @@ router.post('/reviews', (req, res) => {
     }
   });
 });
+
+router.post('/sendmessage', (req, res) => {
+  const msg = req.body;
+  msg.route = 'sendMessage';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error occured');
+    } else {
+      console.log(results);
+      res.status(200).end('Succesful message sent!');
+    }
+  });
+});
+
+router.post('/getrecipients', (req, res) => {
+  const msg = req.body;
+  msg.route = 'getRecipients';
+  kafka.make_request('restaurant', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error occured');
+    } else {
+      console.log(results);
+      res.send(results);
+    }
+  });
+});
+
 module.exports = router;

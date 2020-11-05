@@ -13,6 +13,12 @@ const reviews = new Schema({
   r_name: String,
 });
 
+const messages = new Schema({
+  date_time: Date,
+  message: String,
+  rname: String,
+});
+
 const orders = new Schema({
   items: String,
   r_name: String,
@@ -40,6 +46,7 @@ const customerSchema = new Schema({
   events: [events],
   reviews: [reviews],
   orders: [orders],
+  messages: [messages],
 },
 {
   versionKey: false,

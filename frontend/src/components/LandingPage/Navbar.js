@@ -23,6 +23,7 @@ class Navbar extends Component {
     let contents = null;
     let other = null;
     let home = null;
+    let msg = null;
     if (this.props.isLoggedIn === true) {
       console.log('Able to read cookie');
       navLogin = (
@@ -60,6 +61,9 @@ class Navbar extends Component {
       home = (
         <li><Link style={{ color: 'white' }} to="/customerpage">Home</Link></li>
       );
+      msg = (
+        <li><Link style={{ color: 'white' }} to="/cchatroom">Messages</Link></li>
+      );
     } else if (this.props.persona === 'Restaurant') {
       contents = (
         <li><Link style={{ color: 'white' }} to="/restaurantevents">Restaurant Events</Link></li>
@@ -69,6 +73,9 @@ class Navbar extends Component {
       );
       home = (
         <li><Link style={{ color: 'white' }} to="/restaurantpage">Home</Link></li>
+      );
+      msg = (
+        <li><Link style={{ color: 'white' }} to="/chatroom">Messages</Link></li>
       );
     }
     return (
@@ -80,6 +87,7 @@ class Navbar extends Component {
               {contents}
               {other}
               {home}
+              {msg}
             </ul>
             {navLogin}
           </div>

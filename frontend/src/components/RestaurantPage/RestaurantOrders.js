@@ -23,7 +23,7 @@ class RestaurantOrders extends Component {
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
-        // console.log(response.data);
+        console.log(response.data);
           this.setState({
             res: response.data,
           });

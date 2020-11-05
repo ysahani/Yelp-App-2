@@ -59,6 +59,10 @@ class ViewCustomer extends Component {
       });
   }
 
+  msg = () => {
+    this.props.history.push('/chatroom');
+  }
+
   render() {
     const { res } = this.state;
     const { url } = this.props;
@@ -69,7 +73,8 @@ class ViewCustomer extends Component {
           <h2>{this.props.location}</h2>
           <hr id="line" />
         </div>
-        <div>
+        <button style={{ position: 'relative', left: '845px', top: '35px', backgroundColor: '#d32323', color: 'white'}} onClick={this.msg}>+ Message</button>
+        <div style={{ marginTop: '-20px'}}>
           <br />
           <h4 className="aTitle">About</h4>
           <p className="details">

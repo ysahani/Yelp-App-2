@@ -20,6 +20,12 @@ const eventsSchema = new Schema({
   hashtags: String,
 });
 
+const messages = new Schema({
+  date_time: Date,
+  message: String,
+  cname: String,
+});
+
 const restaurantSchema = new Schema({
   name: String,
   email: String,
@@ -29,6 +35,7 @@ const restaurantSchema = new Schema({
   description: { type: String, required: false },
   menu: [menuSchema],
   events: [eventsSchema],
+  messages: [messages],
 },
 {
   versionKey: false,
