@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import '../CustomerPage/ChatRoom.css';
 
 class ChatRoom extends Component {
     constructor(props) {
@@ -33,34 +34,36 @@ class ChatRoom extends Component {
             }
         });
 
-        // axios.post('http://localhost:3001/customer/getmessages', data)
-        // .then((response) => {
-        //     console.log('Status Code : ', response.status);
-        //     if (response.status === 200) {
-        //         const data = [];
-        //         // this.setState({
-        //         //     msgs: response.data.message,
-        //         //   });
-        //         //   response.data.forEach((item) => {
-        //         //     console.log(item);
-        //         //   });
-        //         console.log(response.data.length);
-        //         for(let i = 0; i < response.data.length; i++) {
-        //             // console.log(response.data[i]);
-        //             let obj = {message: response.data[i].message, cname: response.data[i].cname}
-        //             // data.push(response.data[i].message);
-        //             data.push(obj);
-        //         }
-        //         data.forEach((item) => {
-        //             console.log(item);
-        //         })
-        //         this.setState({
-        //             msgs: data,
-        //           });
-        //     } else {
-        //     console.log('Post error in recipients!');
-        //     }
-        // });
+        if(data.rname !== undefined) {
+        axios.post('http://localhost:3001/customer/getmessages', data)
+        .then((response) => {
+            console.log('Status Code : ', response.status);
+            if (response.status === 200) {
+                const data = [];
+                // this.setState({
+                //     msgs: response.data.message,
+                //   });
+                //   response.data.forEach((item) => {
+                //     console.log(item);
+                //   });
+                console.log(response.data.length);
+                for(let i = 0; i < response.data.length; i++) {
+                    // console.log(response.data[i]);
+                    let obj = {message: response.data[i].message, cname: response.data[i].cname}
+                    // data.push(response.data[i].message);
+                    data.push(obj);
+                }
+                data.forEach((item) => {
+                    console.log(item);
+                })
+                this.setState({
+                    msgs: data,
+                  });
+            } else {
+            console.log('Post error in recipients!');
+            }
+        });
+    }
     }
 
     send = () => {
@@ -78,7 +81,7 @@ class ChatRoom extends Component {
         const data = {
             message: text,
             date_time: dateVal,
-            r_name: rname,
+            r_name: this.props.rname,
             name: this.props.name,
         };
 
@@ -150,7 +153,7 @@ class ChatRoom extends Component {
         
           const { msgs } = this.state;
           const messages = msgs.map((item) => (
-            <div>
+            <div className={item.cname === undefined ? "speech-bubble" : "speech-bubblet"}>
                 <p>{item.message}</p>
                 <hr style={{backgroundColor: 'black'}}></hr>
             </div>

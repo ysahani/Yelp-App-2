@@ -11,7 +11,7 @@ let getMessages = async (msg, callback) => {
         if (restaurant) {
             restaurant.forEach((element) => {
                 element.messages.forEach((ting) => {
-                    if (ting.cname === msg.name) {
+                    if (ting.cname === msg.name && element.name === msg.rname) {
                         // console.log(ting);
                         data.push(ting);
                     }

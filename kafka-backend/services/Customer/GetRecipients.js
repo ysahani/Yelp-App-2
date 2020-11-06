@@ -9,7 +9,7 @@ let getRecipients = async (msg, callback) => {
       }
       restaurant.forEach((element) => {
         element.messages.forEach((item) => {
-          if (item.cname === msg.name && !data.includes(item.cname)) {
+          if (item.cname === msg.name && !data.includes(element.name)) {
               data.push(element.name);
           }
         });
