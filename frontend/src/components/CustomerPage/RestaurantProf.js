@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import Revs from './Revs';
+import Pagination from './Pagination';
 
 class RestaurantProf extends Component {
   constructor(props) {
@@ -9,6 +11,9 @@ class RestaurantProf extends Component {
       res: '',
       revs: [],
       rName: this.props.rName,
+      loading: true,
+      currentPage: 1,
+      postPerPage: 5,
     };
   }
 
@@ -32,6 +37,9 @@ class RestaurantProf extends Component {
         }
       });
 
+      this.setState({
+        loading: true,
+      });
     axios.post('http://localhost:3001/customer/rprofreviews', data)
       .then((response) => {
         console.log('Status Code : ', response.status);
@@ -46,6 +54,9 @@ class RestaurantProf extends Component {
           console.log('Post error in rprofreviews page!');
         }
       });
+      this.setState({
+        loading: false,
+      });
   }
 
   order = () => {
@@ -57,6 +68,14 @@ class RestaurantProf extends Component {
   }
 
   render() {
+    const paginate = pageNumber => this.setState({ currentPage: pageNumber });
+    const { postPerPage } = this.state;
+    const { currentPage } = this.state;
+    const { loading } = this.state;
+    const { revs } = this.state;
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const currentPosts = revs.slice(indexOfFirstPost, indexOfLastPost);
     const contents = this.state.revs.map((item) => (
       <tr>
         <td>
@@ -74,6 +93,7 @@ class RestaurantProf extends Component {
       </tr>
     ));
     const { res } = this.state;
+
     return (
       <div>
         <div id="header">
@@ -121,18 +141,16 @@ class RestaurantProf extends Component {
           </h4>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <table style={{
+          <table  style={{
             backgroundColor: '#D2691E', color: 'white', position: 'relative', left: '500px',
-          }}
-          >
-            <tr>
-              <th>Name</th>
-              <th>Date</th>
-              <th>Rating</th>
-              <th>Comment</th>
-            </tr>
-            { contents }
+          }}>
+          <Revs revs={currentPosts} loading={loading}></Revs>
           </table>
+          <Pagination
+            postsPerPage={postPerPage}
+            totalPosts={revs.length}
+            paginate={paginate}
+          />
         </div>
         <br />
         <br />

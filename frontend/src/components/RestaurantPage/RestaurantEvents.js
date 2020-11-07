@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import Things from './Things';
+import Pagination from '../CustomerPage/Pagination';
 
 class RestaurantEvents extends Component {
   constructor(props) {
@@ -10,6 +12,9 @@ class RestaurantEvents extends Component {
       name: this.props.rname,
       res: [],
       things: [],
+      loading: true,
+      currentPage: 1,
+      postPerPage: 5,
     };
   }
 
@@ -18,7 +23,9 @@ class RestaurantEvents extends Component {
     const data = {
       aname: name,
     };
-
+    this.setState({
+      loading: true,
+    });
     axios.post('http://localhost:3001/restaurant/restaurantevents', data)
       .then((response) => {
         console.log('Status Code : ', response.status);
@@ -33,6 +40,9 @@ class RestaurantEvents extends Component {
               const joined = this.state.things.concat(item[i]);
               this.setState({ things: joined });
             }
+          });
+          this.setState({
+            loading: false,
           });
           console.log(this.state.things);
         } else {
@@ -52,25 +62,32 @@ class RestaurantEvents extends Component {
   }
 
   render() {
-    // const { res } = this.state;
-    const contents = this.state.things.map((item) => (
-      <tr>
-        <td>
-          <Link to="/registerevent" onClick={this.clickLink}>{item.name}</Link>
-          <br />
-          {item.description}
-          <br />
-          {item.time}
-          <br />
-          {item.date.substring(0, 10)}
-          <br />
-          {item.location}
-          <br />
-          {item.hashtags}
-          <br />
-        </td>
-      </tr>
-    ));
+    const paginate = pageNumber => this.setState({ currentPage: pageNumber });
+    const { postPerPage } = this.state;
+    const { currentPage } = this.state;
+    const { loading } = this.state;
+    const { things } = this.state;
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const currentPosts = things.slice(indexOfFirstPost, indexOfLastPost);
+    // const contents = this.state.things.map((item) => (
+    //   <tr>
+    //     <td>
+    //       <Link to="/registerevent" onClick={this.clickLink}>{item.name}</Link>
+    //       <br />
+    //       {item.description}
+    //       <br />
+    //       {item.time}
+    //       <br />
+    //       {item.date.substring(0, 10)}
+    //       <br />
+    //       {item.location}
+    //       <br />
+    //       {item.hashtags}
+    //       <br />
+    //     </td>
+    //   </tr>
+    // ));
     return (
       <div>
         <div id="header">
@@ -91,8 +108,13 @@ class RestaurantEvents extends Component {
             backgroundColor: '#D2691E', color: 'white', position: 'relative', left: '550px',
           }}
           >
-            { contents }
+          <Things fx={this.props.updateViewvent} things={currentPosts} loading={loading}></Things>
           </table>
+          <Pagination
+            postsPerPage={postPerPage}
+            totalPosts={things.length}
+            paginate={paginate}
+          />
         </div>
       </div>
     );
