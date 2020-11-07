@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import Posts from './Posts';
+import Pagination from './Pagination';
 
 class CustomerOrders extends Component {
   constructor(props) {
@@ -8,6 +10,9 @@ class CustomerOrders extends Component {
     this.state = {
       name: this.props.name,
       res: [],
+      loading: true,
+      currentPage: 1,
+      postPerPage: 5,
     };
   }
 
@@ -16,6 +21,9 @@ class CustomerOrders extends Component {
     const data = {
       cName: name,
     };
+    this.setState({
+      loading: true,
+    });
     axios.post('http://localhost:3001/customer/customerorders', data)
       .then((response) => {
         console.log('Status Code : ', response.status);
@@ -30,6 +38,9 @@ class CustomerOrders extends Component {
         } else {
           console.log('Post error in restaurant events!');
         }
+      });
+      this.setState({
+        loading: false,
       });
   }
 
@@ -73,24 +84,60 @@ class CustomerOrders extends Component {
         }
       });
   }
-
   render() {
+    // const contents = this.state.res.map((item) => (
+    //   <tr>
+    //     <td>
+    //       {item.items}
+    //     </td>
+    //     <td>
+    //       {item.real_datetime}
+    //     </td>
+    //     <td>
+    //       {item.order_option}
+    //     </td>
+    //     <td>
+    //       <button id={item.items} type="submit" onClick={this.cancel} style={{ backgroundColor: 'red' }}>Cancel Order</button>
+    //     </td>
+    //   </tr>
+    // ));
     const contents = this.state.res.map((item) => (
-      <tr>
-        <td>
-          {item.items}
-        </td>
-        <td>
-          {item.real_datetime}
-        </td>
-        <td>
-          {item.order_option}
-        </td>
-        <td>
-          <button id={item.items} type="submit" onClick={this.cancel} style={{ backgroundColor: 'red' }}>Cancel Order</button>
-        </td>
-      </tr>
+      <li className='list-group-item' style={{width: '800px'}}>
+        <p style={{color:'black'}}>Items: {item.items} | Date Ordered: {item.real_datetime} | Order Status: {item.order_option}</p>
+        <button id={item.items} type="submit" onClick={this.cancel} style={{ backgroundColor: 'red' }}>Cancel Order</button>
+        </li>
     ));
+    // const { postPerPage } = this.state;
+    // const { currentPage } = this.state;
+    // const { loading } = this.state;
+    // const { res } = this.state;
+    // const indexOfLastPost = currentPage * postPerPage;
+    // const indexOfFirstPost = indexOfLastPost - postPerPage;
+    // const currentPosts = res.slice(indexOfFirstPost, indexOfLastPost);
+    // const Posts = ({ posts, loading }) => {
+    //   if (loading) {
+    //     return <h2>Loading...</h2>;
+    //   }
+    
+    //   return (
+    //     <ul className='list-group mb-4'>
+    //       {posts.map(post => (
+    //         <li key={post.id} className='list-group-item'>
+    //           {post.title}
+    //         </li>
+    //       ))}
+    //     </ul>
+    //   );
+    // };
+   
+    const paginate = pageNumber => this.setState({ currentPage: pageNumber });
+    const { postPerPage } = this.state;
+    const { currentPage } = this.state;
+    const { loading } = this.state;
+    const { res } = this.state;
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const currentPosts = res.slice(indexOfFirstPost, indexOfLastPost);
     return (
       <div>
         <div id="header">
@@ -121,12 +168,15 @@ class CustomerOrders extends Component {
               <option value="Picked Up">Picked Up</option>
             </select>
           </label>
-          <table style={{
-            backgroundColor: '#D2691E', color: 'white', position: 'relative', left: '450px',
-          }}
-          >
-            { contents }
-          </table>
+          <div>
+          <Posts posts={currentPosts} loading={loading}></Posts>
+          <Pagination
+            postsPerPage={postPerPage}
+            totalPosts={res.length}
+            paginate={paginate}
+            name={this.props.name}
+          />
+          </div>
         </div>
       </div>
     );
