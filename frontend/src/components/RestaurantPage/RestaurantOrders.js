@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import Orderz from './Orderz';
+import Pagination from '../CustomerPage/Pagination';
 
 class RestaurantOrders extends Component {
   constructor(props) {
@@ -10,6 +12,9 @@ class RestaurantOrders extends Component {
       name: this.props.name,
       res: [],
       option: '',
+      loading: true,
+      currentPage: 1,
+      postPerPage: 5,
     };
   }
 
@@ -19,6 +24,9 @@ class RestaurantOrders extends Component {
       rName: name,
     };
 
+    this.setState({
+      loading: true,
+    });
     axios.post('http://localhost:3001/restaurant/restaurantorders', data)
       .then((response) => {
         console.log('Status Code : ', response.status);
@@ -29,6 +37,9 @@ class RestaurantOrders extends Component {
           });
           this.state.res.forEach((item) => {
             console.log(item.name);
+          });
+          this.setState({
+            loading: false,
           });
         } else {
           console.log('Post error in restaurant orders!');
@@ -91,6 +102,7 @@ class RestaurantOrders extends Component {
 
   render() {
     const showItems = (aption, name, option) => {
+      this.props.updateFilter(option,name);
       if (aption === 'Delivery' && option === 'Order Recieved') {
         return (
           <select id={name} name={name} onChange={this.handleChange}>
@@ -173,6 +185,15 @@ class RestaurantOrders extends Component {
         );
       }
     };
+    const { res } = this.state;
+    const { loading } = this.state;
+
+    const paginate = pageNumber => this.setState({ currentPage: pageNumber });
+    const { postPerPage } = this.state;
+    const { currentPage } = this.state;
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const currentPosts = res.slice(indexOfFirstPost, indexOfLastPost);
 
     const contents = this.state.res.map((item) => (
       <tr>
@@ -214,8 +235,13 @@ class RestaurantOrders extends Component {
             </select>
           </label>
           <table style={{ position: 'relative', left: '450px' }}>
-            { contents }
+            <Orderz fx={this.props.updateCname} fx2={showItems} orders={currentPosts} loading={loading}></Orderz>
           </table>
+          <Pagination
+            postsPerPage={postPerPage}
+            totalPosts={res.length}
+            paginate={paginate}
+          />
         </div>
       </div>
     );
@@ -231,6 +257,11 @@ const mapDispatchToProps = (dispatch) => ({
   updateCname: (cnam) => {
     dispatch({
       type: 'UPDATE_CNAME', cName: cnam,
+    });
+  },
+  updateFilter: (stat, item) => {
+    dispatch({
+      type: 'UPDATE_FILTER', status: stat, items: item,
     });
   },
 });

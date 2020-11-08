@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Dishes from './Dishes';
+import Pagination from '../CustomerPage/Pagination';
 
 class Menu extends Component {
   constructor(props) {
@@ -9,6 +11,9 @@ class Menu extends Component {
     this.state = {
       name: this.props.rname,
       res: [],
+      loading: true,
+      currentPage: 1,
+      postPerPage: 5,
     };
   }
 
@@ -18,6 +23,9 @@ class Menu extends Component {
       rname: name,
     };
 
+    this.setState({
+      loading: true,
+    });
     axios.defaults.headers.common.authorization = localStorage.getItem('token');
     axios.post('http://localhost:3001/restaurant/menu', data)
       .then((response) => {
@@ -34,6 +42,9 @@ class Menu extends Component {
           console.log('Post error in menu!');
         }
       });
+      this.setState({
+        loading: false,
+      });
   }
 
   addMenu = () => {
@@ -45,6 +56,14 @@ class Menu extends Component {
   }
 
   render() {
+    const paginate = pageNumber => this.setState({ currentPage: pageNumber });
+    const { postPerPage } = this.state;
+    const { currentPage } = this.state;
+    const { loading } = this.state;
+    const { res } = this.state;
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const currentPosts = res.slice(indexOfFirstPost, indexOfLastPost);
     const contents = this.state.res.map((item) => (
       <tr>
         <td>
@@ -93,16 +112,15 @@ class Menu extends Component {
               backgroundColor: '#D2691E', color: 'white', position: 'relative', left: '340px',
             }}
           >
-            <tr>
-              <th>Dish name</th>
-              <th>Ingredients</th>
-              <th>Price</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Picture</th>
-            </tr>
-            { contents }
+          <Dishes fx={this.props.updateDishName} dishes={currentPosts} loading={loading}></Dishes>
           </table>
+          <div style={{position: 'relative', left: '700px'}}>
+          <Pagination
+            postsPerPage={postPerPage}
+            totalPosts={res.length}
+            paginate={paginate}
+          />
+          </div>
         </div>
       </div>
     );

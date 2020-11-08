@@ -73,6 +73,7 @@ class ChatRoom extends Component {
           (`0${date.getUTCMinutes()}`).slice(-2)}:${
           (`0${date.getUTCSeconds()}`).slice(-2)}`;
         const text = document.getElementById('messageTxt').value;
+        this.props.updateMsg(text);
         console.log(text);
         document.getElementById('messageTxt').value = '';
         const data = {
@@ -160,6 +161,17 @@ class ChatRoom extends Component {
         ));
         return (
             <div>
+                 <div id="header">
+                <h1>{this.props.rname}</h1>
+                <h2>{this.props.location}</h2>
+                <hr id="line" />
+                </div>
+                <div id="events">
+                <h4>
+                    Messages
+                </h4>
+                <br/>
+                </div>
                 <div style={{ position: 'relative', height: '400px', width: '300px', border: 'solid', overflowY: 'scroll', borderColor: 'gray'}}>
                     {contents}
                 </div>
@@ -175,6 +187,7 @@ class ChatRoom extends Component {
 const mapStateToProps = (state) => ({
     cname: state.cName,
     rname: state.name,
+    location: state.location,
   });
   
   const mapDispatchToProps = (dispatch) => ({
@@ -183,6 +196,11 @@ const mapStateToProps = (state) => ({
         type: 'UPDATE_CNAME', cName: cnam,
       });
     },
+    updateMsg: (msg) => {
+        dispatch({
+          type: 'UPDATE_MSG', message: msg,
+        });
+      },
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatRoom);

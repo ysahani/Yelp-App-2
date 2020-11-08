@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['isSignedUp', 'isLoggedIn', 'email', 'name', 'location', 'description', 'timings', 'eventName', 'eventDesc', 'eventTime', 'eventDate', 'eventLoc', 'eventHashtags', 'yelpingSince', 'thingsILove', 'findMeIn', 'blogsite', 'dob', 'city', 'state', 'country', 'nickname', 'phone', 'cName', 'results', 'rName', 'dName', 'url', 'cEmail', 'persona'],
+  whitelist: ['isSignedUp', 'isLoggedIn', 'email', 'name', 'location', 'description', 'timings', 'eventName', 'eventDesc', 'eventTime', 'eventDate', 'eventLoc', 'eventHashtags', 'yelpingSince', 'thingsILove', 'findMeIn', 'blogsite', 'dob', 'city', 'state', 'country', 'nickname', 'phone', 'cName', 'results', 'rName', 'dName', 'url', 'cEmail', 'persona', 'orderItems', 'delivery', 'status', 'message'],
 };
 const createState = {
 
@@ -147,6 +147,26 @@ const appReducer = (state = createState, action) => {
     return {
       ...state,
       cEmail: action.cEmail,
+    };
+  }
+  if (action.type === 'UPDATE_ORDER') {
+    return {
+      ...state,
+      orderItems: action.orderItems,
+      delivery: action.delivery
+    };
+  }
+  if (action.type === 'UPDATE_FILTER') {
+    return {
+      ...state,
+      orderItems: action.items,
+      status: action.status
+    };
+  }
+  if (action.type === 'UPDATE_MSG') {
+    return {
+      ...state,
+      message: action.message,
     };
   }
   return state;

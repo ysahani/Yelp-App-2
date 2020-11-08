@@ -14,6 +14,9 @@ const { cancelOrder } = require("./CancelOrder");
 const { getRecipients } = require("./GetRecipients");
 const { sendMessage } = require("./SendMessage");
 const { getMessages } = require("./GetMessages");
+const { customerUrl } = require("./CustomerUrl");
+const { getCustomerUrl } = require("./GetCustomerUrl");
+const { searchUser } = require("./SearchUser");
 
 let handle_request = (msg, callback) => {
   switch (msg.route) {
@@ -61,6 +64,15 @@ let handle_request = (msg, callback) => {
       break;
     case "getMessages":
       getMessages(msg, callback);
+      break;
+    case "customerUrl":
+      customerUrl(msg, callback);
+      break;
+    case "getCustomerUrl":
+      getCustomerUrl(msg, callback);
+      break;
+    case "searchUser":
+      searchUser(msg, callback);
       break;
   }
 };

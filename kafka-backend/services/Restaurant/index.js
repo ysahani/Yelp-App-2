@@ -14,6 +14,7 @@ const { updateDish } = require("./UpdateDish");
 const { reviews } = require("./Reviews");
 const { sendMessage } = require("./SendMessage");
 const { getRecipients } = require("./GetRecipients");
+const { dishUrl } = require("./DishUrl");
 
 let handle_request = (msg, callback) => {
   switch (msg.route) {
@@ -61,6 +62,9 @@ let handle_request = (msg, callback) => {
       break;
     case "getRecipients":
       getRecipients(msg, callback);
+      break;
+    case "dishUrl":
+      dishUrl(msg, callback);
       break;
   }
 };

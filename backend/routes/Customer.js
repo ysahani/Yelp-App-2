@@ -444,4 +444,18 @@ router.post('/getmessages', (req, res) => {
   });
 });
 
+router.post('/searchuser', (req, res) => {
+  const msg = req.body;
+  msg.route = 'searchUser';
+  kafka.make_request('customer', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error Occured');
+    } else {
+      console.log(results);
+      res.send(results);
+    }
+  });
+});
+
 module.exports = router;

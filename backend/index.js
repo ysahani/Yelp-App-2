@@ -58,7 +58,7 @@ app.use('/user', SignUp);
 app.use('/user', Login);
 app.use('/restaurant', Restaurant);
 app.use('/customer', Customer);
-// app.use('/images', Images);
+app.use('/images', Images);
 
 // start your server on port 3001
 app.listen(3001, () => console.log('Server Listening on port 3001'));

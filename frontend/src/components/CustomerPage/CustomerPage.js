@@ -105,6 +105,30 @@ class CustomerPage extends Component {
       });
   }
 
+  searchUser = (e) => {
+    e.preventDefault();
+    const data = {
+      val: document.getElementById('userr').value,
+    };
+    // axios.defaults.headers.common.authorization = localStorage.getItem('token');
+    axios.post('http://localhost:3001/customer/searchuser', data)
+      .then((response) => {
+        console.log('Status Code : ', response.status);
+        if (response.status === 200) {
+          console.log(response.data.name);
+          this.setState({
+            res: response.data.name,
+          });
+          const { res } = this.state;
+          this.props.updateResults(res);
+          // this.props.history.push('/viewrestaurant');
+          console.log('Post success in customer page!');
+        } else {
+          console.log('Post error in customer page!');
+        }
+      });
+  }
+
   render() {
     const url = this.props.url;
     return (
@@ -120,6 +144,8 @@ class CustomerPage extends Component {
                <option value="Location">Location</option>
              </select>
            </label>
+           <input style={{marginLeft: '20px'}} placeholder="Search for User.." id="userr" />
+          <button type="submit" onClick={this.searchUser}>Search</button>
         </div>
         <div id="header">
           <h1>{this.props.name}</h1>

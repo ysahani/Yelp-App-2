@@ -59,7 +59,7 @@ class Navbar extends Component {
         <li><Link style={{ color: 'white' }} to="/customerorders">Customer Orders</Link></li>
       );
       home = (
-        <li><Link style={{ color: 'white' }} to="/customerpage">Home</Link></li>
+        <li><Link style={{ color: 'white' }} to="/customerpage">Users</Link></li>
       );
       msg = (
         <li><Link style={{ color: 'white' }} to="/cchatroom">Messages</Link></li>

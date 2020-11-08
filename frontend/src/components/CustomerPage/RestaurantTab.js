@@ -49,7 +49,7 @@ class RestaurantTab extends Component {
     const { option } = this.state;
     const arr = [...this.state.orderArr];
     const fullOrder = arr.join(',');
-
+    this.props.updateOrder(fullOrder, option);
     const date = new Date();
     const dateVal = `${date.getUTCFullYear()}-${
       (`0${date.getUTCMonth() + 1}`).slice(-2)}-${
@@ -146,4 +146,12 @@ const mapStateToProps = (state) => ({
   city: state.city,
   state: state.state,
 });
-export default connect(mapStateToProps)(RestaurantTab);
+
+const mapDispatchToProps = (dispatch) => ({
+  updateOrder: (items, choice) => {
+    dispatch({
+      type: 'UPDATE_ORDER', orderItems: items, delivery: choice,
+    });
+  },
+});
+export default connect(mapStateToProps, mapDispatchToProps)(RestaurantTab);
