@@ -105,7 +105,7 @@ class RestaurantEvents extends Component {
         </div>
         <div style={{ textAlign: 'center' }}>
           <table style={{
-            backgroundColor: '#D2691E', color: 'white', position: 'relative', left: '550px',
+            backgroundColor: '#D2691E', color: 'white', position: 'relative', left: '570px',
           }}
           >
           <Things fx={this.props.updateViewvent} things={currentPosts} loading={loading}></Things>

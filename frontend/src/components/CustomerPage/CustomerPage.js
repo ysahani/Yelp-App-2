@@ -110,7 +110,7 @@ class CustomerPage extends Component {
     const data = {
       val: document.getElementById('userr').value,
     };
-    // axios.defaults.headers.common.authorization = localStorage.getItem('token');
+    axios.defaults.headers.common.authorization = localStorage.getItem('token');
     axios.post('http://localhost:3001/customer/searchuser', data)
       .then((response) => {
         console.log('Status Code : ', response.status);
@@ -121,7 +121,7 @@ class CustomerPage extends Component {
           });
           const { res } = this.state;
           this.props.updateResults(res);
-          // this.props.history.push('/viewrestaurant');
+          this.props.history.push('/viewuser');
           console.log('Post success in customer page!');
         } else {
           console.log('Post error in customer page!');

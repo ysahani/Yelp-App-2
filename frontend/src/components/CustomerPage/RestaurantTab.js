@@ -123,7 +123,7 @@ class RestaurantTab extends Component {
         <div style={{ position: 'relative', left: '400px' }}>
           {contents}
         </div>
-        <div style={{ position: 'relative', left: '770px', bottom: '150px' }}>
+        <div style={{ position: 'relative', left: '770px', bottom: '450px' }}>
           <p>
             Your Order:
             {' '}

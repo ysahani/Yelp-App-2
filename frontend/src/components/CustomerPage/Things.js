@@ -6,12 +6,11 @@ import { connect } from 'react-redux';
 
 const Things = ({ fx, things, loading }) => {
     const history = useHistory();
-    function clickLink (name) {
+    function clickLink (name, description, time, date, location, hashtags) {
         // const history = useHistory();
         // e.preventDefault();
         console.log(name);
-        fx(name);
-        history.push('/registeredlist');
+        fx(name, description, time, date, location, hashtags);
       }
   if (loading) {
     return <h2>Loading...</h2>;
@@ -19,7 +18,7 @@ const Things = ({ fx, things, loading }) => {
   const contents = things.map((item) => (
     <tr>
       <td>
-        {item.name}
+        <Link to="/registerevent" onClick={() => clickLink(item.name, item.description, item.time, item.date.substring(0, 10), item.location, item.hashtags)}>{item.name}</Link>
         <br />
         {item.description}
         <br />

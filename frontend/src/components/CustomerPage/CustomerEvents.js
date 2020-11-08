@@ -249,7 +249,7 @@ class CustomerEvents extends Component {
         </div>
         <div style={{ textAlign: 'center' }}>
           <table style={{
-            backgroundColor: '#D2691E', color: 'white', position: 'relative', left: '550px',
+            backgroundColor: '#D2691E', color: 'white', position: 'relative', left: '570px',
           }}
           >
             <Things fx={this.props.updateEvent} things={currentPosts} loading={loading}></Things>
@@ -268,7 +268,7 @@ class CustomerEvents extends Component {
           </h4>
         </div>
         <table style={{
-          backgroundColor: '#D2691E', color: 'white', position: 'relative', left: '550px',
+          backgroundColor: '#D2691E', color: 'white', position: 'relative', left: '580px',
         }}
         >
           { viewreg }

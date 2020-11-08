@@ -25,6 +25,8 @@ import CustomerOrders from './CustomerPage/CustomerOrders';
 import EditDish from './RestaurantPage/EditDish';
 import ChatRoom from './RestaurantPage/ChatRoom';
 import CChatRoom from './CustomerPage/ChatRoom';
+import ViewUser from './CustomerPage/ViewUser';
+import ViewCust from './CustomerPage/ViewCust';
 
 
 // Create a Main Component
@@ -64,6 +66,8 @@ class Main extends Component {
         <Route path="/editdish" component={EditDish} />
         <Route path="/chatroom" component={ChatRoom} />
         <Route path="/cchatroom" component={CChatRoom} />
+        <Route path="/viewuser" component={ViewUser} />
+        <Route path="/viewcust" component={ViewCust} />
       </div>
     );
   }

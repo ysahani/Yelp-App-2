@@ -17,6 +17,7 @@ const { getMessages } = require("./GetMessages");
 const { customerUrl } = require("./CustomerUrl");
 const { getCustomerUrl } = require("./GetCustomerUrl");
 const { searchUser } = require("./SearchUser");
+const { followUser } = require("./FollowUser");
 
 let handle_request = (msg, callback) => {
   switch (msg.route) {
@@ -73,6 +74,9 @@ let handle_request = (msg, callback) => {
       break;
     case "searchUser":
       searchUser(msg, callback);
+      break;
+    case "followUser":
+      followUser(msg, callback);
       break;
   }
 };

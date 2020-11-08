@@ -444,7 +444,7 @@ router.post('/getmessages', (req, res) => {
   });
 });
 
-router.post('/searchuser', (req, res) => {
+router.post('/searchuser', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'searchUser';
   kafka.make_request('customer', msg, (err, results) => {
@@ -458,4 +458,17 @@ router.post('/searchuser', (req, res) => {
   });
 });
 
+router.post('/followuser', (req, res) => {
+  const msg = req.body;
+  msg.route = 'followUser';
+  kafka.make_request('customer', msg, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.status(202).end('Error Occured');
+    } else {
+      console.log(results);
+      res.status(200).end('Succesful user followed!');
+    }
+  });
+});
 module.exports = router;

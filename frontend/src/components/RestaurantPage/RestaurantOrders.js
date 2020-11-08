@@ -102,7 +102,7 @@ class RestaurantOrders extends Component {
 
   render() {
     const showItems = (aption, name, option) => {
-      this.props.updateFilter(option,name);
+      this.props.updateFilter('Preparing',name);
       if (aption === 'Delivery' && option === 'Order Recieved') {
         return (
           <select id={name} name={name} onChange={this.handleChange}>

@@ -114,7 +114,7 @@ class Menu extends Component {
           >
           <Dishes fx={this.props.updateDishName} dishes={currentPosts} loading={loading}></Dishes>
           </table>
-          <div style={{position: 'relative', left: '700px'}}>
+          <div style={{position: 'relative', left: '600px'}}>
           <Pagination
             postsPerPage={postPerPage}
             totalPosts={res.length}

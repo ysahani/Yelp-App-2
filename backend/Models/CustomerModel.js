@@ -28,6 +28,10 @@ const orders = new Schema({
   real_datetime: String,
 });
 
+const following = new Schema({
+  cname: String,
+});
+
 const customerSchema = new Schema({
   email: String,
   name: String,
@@ -47,6 +51,7 @@ const customerSchema = new Schema({
   reviews: [reviews],
   orders: [orders],
   messages: [messages],
+  following: [following],
 },
 {
   versionKey: false,
