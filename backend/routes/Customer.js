@@ -30,7 +30,7 @@ auth();
 //   });
 // });
 
-router.post('/updatecustomer', (req, res) => {
+router.post('/updatecustomer', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'updateCustomer';
   kafka.make_request('customer', msg, (err, results) => {
@@ -62,7 +62,7 @@ router.post('/updatecustomer', (req, res) => {
 //   });
 // });
 
-router.post('/customerevents', (req, res) => {
+router.post('/customerevents', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'customerEvents';
   kafka.make_request('customer', msg, (err, results) => {
@@ -109,7 +109,7 @@ router.post('/customerevents', (req, res) => {
 //   });
 // });
 
-router.post('/customerevent', (req, res) => {
+router.post('/customerevent', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'customerEvent';
   kafka.make_request('customer', msg, (err, results) => {
@@ -143,7 +143,7 @@ router.post('/customerevent', (req, res) => {
 //   });
 // });
 
-router.post('/registerevent', (req, res) => {
+router.post('/registerevent', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'registerEvent';
   kafka.make_request('customer', msg, (err, results) => {
@@ -173,7 +173,7 @@ router.post('/registerevent', (req, res) => {
 //   });
 // });
 
-router.post('/showRegistered', (req, res) => {
+router.post('/showRegistered', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'showRegistered';
   kafka.make_request('customer', msg, (err, results) => {
@@ -232,7 +232,7 @@ router.post('/customerpage', checkAuth, (req, res) => {
 //   });
 // });
 
-router.post('/restaurantprof', (req, res) => {
+router.post('/restaurantprof', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'restaurantProf';
   kafka.make_request('customer', msg, (err, results) => {
@@ -266,7 +266,7 @@ router.post('/restaurantprof', (req, res) => {
 //   });
 // });
 
-router.post('/makereview', (req, res) => {
+router.post('/makereview', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'makeReview';
   kafka.make_request('customer', msg, (err, results) => {
@@ -301,7 +301,7 @@ router.post('/makereview', (req, res) => {
 //   });
 // });
 
-router.post('/rprofreviews', (req, res) => {
+router.post('/rprofreviews', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'rProfReviews';
   kafka.make_request('customer', msg, (err, results) => {
@@ -335,7 +335,7 @@ router.post('/rprofreviews', (req, res) => {
 //   });
 // });
 
-router.post('/placeorder', (req, res) => {
+router.post('/placeorder', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'placeOrder';
   kafka.make_request('customer', msg, (err, results) => {
@@ -365,7 +365,7 @@ router.post('/placeorder', (req, res) => {
 //   });
 // });
 
-router.post('/customerorders', (req, res) => {
+router.post('/customerorders', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'customerOrders';
   kafka.make_request('customer', msg, (err, results) => {
@@ -389,7 +389,7 @@ router.post('/customerorders', (req, res) => {
 //   });
 // });
 
-router.post('/cancelorder', (req, res) => {
+router.post('/cancelorder', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'cancelOrder';
   kafka.make_request('customer', msg, (err, results) => {
@@ -403,7 +403,7 @@ router.post('/cancelorder', (req, res) => {
   });
 });
 
-router.post('/getrecipients', (req, res) => {
+router.post('/getrecipients', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'getRecipients';
   kafka.make_request('customer', msg, (err, results) => {
@@ -416,7 +416,7 @@ router.post('/getrecipients', (req, res) => {
   });
 });
 
-router.post('/sendmessage', (req, res) => {
+router.post('/sendmessage', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'sendMessage';
   kafka.make_request('customer', msg, (err, results) => {
@@ -430,7 +430,7 @@ router.post('/sendmessage', (req, res) => {
   });
 });
 
-router.post('/getmessages', (req, res) => {
+router.post('/getmessages', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'getMessages';
   kafka.make_request('customer', msg, (err, results) => {
@@ -458,7 +458,7 @@ router.post('/searchuser', checkAuth, (req, res) => {
   });
 });
 
-router.post('/followuser', (req, res) => {
+router.post('/followuser', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'followUser';
   kafka.make_request('customer', msg, (err, results) => {

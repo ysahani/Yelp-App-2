@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import {API_URL} from '../Utils';
 
 class RestaurantTab extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class RestaurantTab extends Component {
       rname: rName,
     };
     axios.defaults.headers.common.authorization = localStorage.getItem('token');
-    axios.post('http://localhost:3001/restaurant/menu', data)
+    axios.post(`${API_URL}/restaurant/menu`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -69,7 +70,7 @@ class RestaurantTab extends Component {
       real_datetime: datetime,
     };
 
-    axios.post('http://localhost:3001/customer/placeorder', data)
+    axios.post(`${API_URL}/customer/placeorder`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

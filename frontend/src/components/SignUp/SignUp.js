@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import Yelp from '../../download.png';
+import {API_URL} from '../Utils';
 
 class SignUp extends Component {
   constructor(props) {
@@ -77,7 +78,7 @@ class SignUp extends Component {
        // set the with credentials to true
        axios.defaults.withCredentials = true;
        // make a post request with the user data
-       axios.post('http://localhost:3001/user/signup', data)
+       axios.post(`${API_URL}/user/signup`, data)
          .then((response) => {
            console.log('Status Code : ', response.status);
            if (response.status === 200) {

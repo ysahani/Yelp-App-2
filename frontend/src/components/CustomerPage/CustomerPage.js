@@ -5,6 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './CustomerPage.css';
+import {API_URL} from '../Utils';
 
 class CustomerPage extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class CustomerPage extends Component {
     const data = {
       email: this.props.email,
     };
-    axios.post('http://localhost:3001/images/getcustomerurl', data)
+    axios.post(`${API_URL}/images/getcustomerurl`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         console.log(response.data);
@@ -52,7 +53,7 @@ class CustomerPage extends Component {
     const uploadPromises = this.state.pictures.map((image) => {
       const data = new FormData();
       data.append('image', image, image.name);
-      return axios.post('http://localhost:3001/images/uploadImage', data);
+      return axios.post(`${API_URL}/images/uploadImage`, data);
     });
     axios.all(uploadPromises)
       .then((results) => {
@@ -71,7 +72,7 @@ class CustomerPage extends Component {
     this.setState({
       url: this.props.url,
     });
-    axios.post('http://localhost:3001/images/customerurl', data)
+    axios.post(`${API_URL}/images/customerurl`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -88,7 +89,7 @@ class CustomerPage extends Component {
       val: document.getElementById('searchh').value,
     };
     axios.defaults.headers.common.authorization = localStorage.getItem('token');
-    axios.post('http://localhost:3001/customer/customerpage', data)
+    axios.post(`${API_URL}/customer/customerpage`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -111,7 +112,7 @@ class CustomerPage extends Component {
       val: document.getElementById('userr').value,
     };
     axios.defaults.headers.common.authorization = localStorage.getItem('token');
-    axios.post('http://localhost:3001/customer/searchuser', data)
+    axios.post(`${API_URL}/customer/searchuser`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

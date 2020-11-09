@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import {API_URL} from '../Utils';
 
 class UpdateProfile extends Component {
   constructor(props) {
@@ -60,7 +61,8 @@ class UpdateProfile extends Component {
     };
     this.props.updateProfile(email, name, location, description, timings);
     // make a post request with the user data
-    axios.post('http://localhost:3001/restaurant/updateprofile', data)
+    axios.defaults.headers.common.authorization = localStorage.getItem('token');
+    axios.post(`${API_URL}/restaurant/updateprofile`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

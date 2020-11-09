@@ -31,7 +31,7 @@ auth();
 //   });
 // });
 
-router.post('/updateprofile', (req, res) => {
+router.post('/updateprofile', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'updateProfile';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -67,7 +67,7 @@ router.post('/updateprofile', (req, res) => {
 //   });
 // });
 
-router.post('/addevent', (req, res) => {
+router.post('/addevent', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'addEvent';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -99,7 +99,7 @@ router.post('/addevent', (req, res) => {
 //   });
 // });
 
-router.post('/restaurantevents', (req, res) => {
+router.post('/restaurantevents', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'restaurantEvents';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -129,7 +129,7 @@ router.post('/restaurantevents', (req, res) => {
 //   });
 // });
 
-router.post('/registeredlist', (req, res) => {
+router.post('/registeredlist', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'registeredList';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -152,7 +152,7 @@ router.post('/registeredlist', (req, res) => {
 //   });
 // });
 
-router.post('/viewcustomer', (req, res) => {
+router.post('/viewcustomer', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'viewCustomer';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -186,7 +186,7 @@ router.post('/viewcustomer', (req, res) => {
 //   });
 // });
 
-router.post('/addmenuitem', (req, res) => {
+router.post('/addmenuitem', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'addMenuItem';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -247,7 +247,7 @@ router.post('/menu', checkAuth, (req, res) => {
 //   });
 // });
 
-router.post('/restaurantorders', (req, res) => {
+router.post('/restaurantorders', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'restaurantOrders';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -271,7 +271,7 @@ router.post('/restaurantorders', (req, res) => {
 //   });
 // });
 
-router.post('/updateorder', (req, res) => {
+router.post('/updateorder', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'updateOrder';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -349,7 +349,7 @@ router.post('/updateorder', (req, res) => {
 //   }
 // });
 
-router.post('/filterorder', (req, res) => {
+router.post('/filterorder', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'filterOrder';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -380,7 +380,7 @@ router.post('/filterorder', (req, res) => {
 //   });
 // });
 
-router.post('/editdish', (req, res) => {
+router.post('/editdish', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'editDish';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -408,7 +408,7 @@ router.post('/editdish', (req, res) => {
 //   });
 // });
 
-router.post('/updatedish', (req, res) => {
+router.post('/updatedish', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'updateDish';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -439,7 +439,7 @@ router.post('/updatedish', (req, res) => {
 //   });
 // });
 
-router.post('/reviews', (req, res) => {
+router.post('/reviews', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'reviews';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -452,7 +452,7 @@ router.post('/reviews', (req, res) => {
   });
 });
 
-router.post('/sendmessage', (req, res) => {
+router.post('/sendmessage', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'sendMessage';
   kafka.make_request('restaurant', msg, (err, results) => {
@@ -466,7 +466,7 @@ router.post('/sendmessage', (req, res) => {
   });
 });
 
-router.post('/getrecipients', (req, res) => {
+router.post('/getrecipients', checkAuth, (req, res) => {
   const msg = req.body;
   msg.route = 'getRecipients';
   kafka.make_request('restaurant', msg, (err, results) => {

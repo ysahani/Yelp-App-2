@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import {API_URL} from '../Utils';
 
 class RegisteredList extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class RegisteredList extends Component {
       eName: eventName,
     };
 
-    axios.post('http://localhost:3001/restaurant/registeredlist', data)
+    axios.post(`${API_URL}/restaurant/registeredlist`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

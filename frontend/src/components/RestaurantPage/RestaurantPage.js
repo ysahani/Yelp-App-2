@@ -12,6 +12,7 @@ class RestaurantPage extends Component {
   }
 
   render() {
+    axios.defaults.headers.common.authorization = localStorage.getItem('token');
     return (
       <div>
         <div id="header">

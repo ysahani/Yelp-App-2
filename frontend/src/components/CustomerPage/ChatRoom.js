@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../CustomerPage/ChatRoom.css';
+import {API_URL} from '../Utils';
 
 class ChatRoom extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class ChatRoom extends Component {
             name: this.props.name,
             rname: this.props.rname,
         }
-        axios.post('http://localhost:3001/customer/getrecipients', data)
+        axios.post(`${API_URL}/customer/getrecipients`, data)
         .then((response) => {
             console.log('Status Code : ', response.status);
             if (response.status === 200) {
@@ -35,7 +36,7 @@ class ChatRoom extends Component {
         });
 
         if(data.rname !== undefined) {
-        axios.post('http://localhost:3001/customer/getmessages', data)
+        axios.post(`${API_URL}/customer/getmessages`, data)
         .then((response) => {
             console.log('Status Code : ', response.status);
             if (response.status === 200) {
@@ -86,7 +87,7 @@ class ChatRoom extends Component {
             name: this.props.name,
         };
 
-        axios.post('http://localhost:3001/customer/sendmessage', data)
+        axios.post(`${API_URL}/customer/sendmessage`, data)
         .then((response) => {
             console.log('Status Code : ', response.status);
             if (response.status === 200) {
@@ -114,7 +115,7 @@ class ChatRoom extends Component {
             name: this.props.name,
             rname: e.currentTarget.textContent,
         };
-        axios.post('http://localhost:3001/customer/getmessages', data)
+        axios.post(`${API_URL}/customer/getmessages`, data)
         .then((response) => {
             console.log('Status Code : ', response.status);
             if (response.status === 200) {

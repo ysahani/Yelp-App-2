@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import {API_URL} from '../Utils';
 
 class UpdateCustomer extends Component {
   constructor(props) {
@@ -123,7 +124,7 @@ class UpdateCustomer extends Component {
       aPhone: phone,
     };
 
-    axios.post('http://localhost:3001/customer/updatecustomer', data)
+    axios.post(`${API_URL}/customer/updatecustomer`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

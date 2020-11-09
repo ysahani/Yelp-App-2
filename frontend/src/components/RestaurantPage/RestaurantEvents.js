@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import Things from './Things';
 import Pagination from '../CustomerPage/Pagination';
+import {API_URL} from '../Utils';
 
 class RestaurantEvents extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class RestaurantEvents extends Component {
     this.setState({
       loading: true,
     });
-    axios.post('http://localhost:3001/restaurant/restaurantevents', data)
+    axios.post(`${API_URL}/restaurant/restaurantevents`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

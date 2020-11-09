@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ImageUploader from 'react-images-upload';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import {API_URL} from '../Utils'
 
 class EditDish extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class EditDish extends Component {
       restaurant_name: this.props.rname,
       dish_name: this.props.dish_name,
     };
-    axios.post('http://localhost:3001/restaurant/editdish', data)
+    axios.post(`${API_URL}/restaurant/editdish`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -92,7 +93,7 @@ class EditDish extends Component {
       cat: category,
       desc: description,
     };
-    axios.post('http://localhost:3001/restaurant/updatedish', data)
+    axios.post(`${API_URL}/restaurant/updatedish`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -109,7 +110,7 @@ class EditDish extends Component {
     const uploadPromises = this.state.pictures.map((image) => {
       const data = new FormData();
       data.append('image', image, image.name);
-      return axios.post('http://localhost:3001/images/uploadImage', data);
+      return axios.post(`${API_URL}/images/uploadImage`, data);
     });
     axios.all(uploadPromises)
       .then((results) => {
@@ -126,7 +127,7 @@ class EditDish extends Component {
       url: this.props.url,
     };
     console.log(data.dish_namez);
-    axios.post('http://localhost:3001/images/dishurl', data)
+    axios.post(`${API_URL}/images/dishurl`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

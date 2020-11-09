@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import {API_URL} from '../Utils';
 
 class AddMenuItem extends Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class AddMenuItem extends Component {
     };
 
     e.preventDefault();
-    axios.post('http://localhost:3001/restaurant/addmenuitem', data)
+    axios.post(`${API_URL}/restaurant/addmenuitem`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

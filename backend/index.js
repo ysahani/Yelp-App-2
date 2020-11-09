@@ -60,5 +60,10 @@ app.use('/restaurant', Restaurant);
 app.use('/customer', Customer);
 app.use('/images', Images);
 
-// start your server on port 3001
-app.listen(3001, () => console.log('Server Listening on port 3001'));
+// start your server on port 5000
+app.listen(5000, () => console.log('Server Listening on port 5000'));
+const server = app.listen(5000, () => {
+  console.log('Server Listening on port 5000');
+});
+
+module.exports = server;

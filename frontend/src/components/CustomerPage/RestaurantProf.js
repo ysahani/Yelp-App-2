@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import Revs from './Revs';
 import Pagination from './Pagination';
+import {API_URL} from '../Utils';
 
 class RestaurantProf extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class RestaurantProf extends Component {
     const data = {
       name: rName,
     };
-    axios.post('http://localhost:3001/customer/restaurantprof', data)
+    axios.post(`${API_URL}/customer/restaurantprof`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -40,7 +41,7 @@ class RestaurantProf extends Component {
       this.setState({
         loading: true,
       });
-    axios.post('http://localhost:3001/customer/rprofreviews', data)
+    axios.post(`${API_URL}/customer/rprofreviews`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

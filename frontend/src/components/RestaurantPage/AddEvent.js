@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import {API_URL} from '../Utils';
 
 class AddEvent extends Component {
   constructor(props) {
@@ -70,7 +71,7 @@ class AddEvent extends Component {
       htag: hashtags,
     };
 
-    axios.post('http://localhost:3001/restaurant/addevent', data)
+    axios.post(`${API_URL}/restaurant/addevent`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

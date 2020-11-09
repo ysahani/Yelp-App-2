@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import Yelp from '../../download.png';
 // const jwtDecode = require('jwt-decode');
+import {API_URL} from '../Utils';
 
 class LogIn extends Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class LogIn extends Component {
     // set the with credentials to true
     axios.defaults.withCredentials = true;
     // make a post request with the user data
-    axios.post('http://localhost:3001/user/login', data)
+    axios.post(`${API_URL}/user/login`, data)
       .then((response) => {
         this.setState({
           token: response.data,

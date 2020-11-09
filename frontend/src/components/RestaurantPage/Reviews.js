@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Reviews.css';
+import {API_URL} from '../Utils';
 
 class Reviews extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Reviews extends Component {
     const data = {
       r_name: rname,
     };
-    axios.post('http://localhost:3001/restaurant/reviews', data)
+    axios.post(`${API_URL}/restaurant/reviews`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

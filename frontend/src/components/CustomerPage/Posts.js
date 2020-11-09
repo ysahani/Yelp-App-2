@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import {API_URL} from '../Utils';
 
 function cancel (items, name) {
     console.log(items);
@@ -10,7 +11,7 @@ function cancel (items, name) {
       items: val,
       name: name,
     };
-    axios.post('http://localhost:3001/customer/cancelorder', data)
+    axios.post(`${API_URL}/customer/cancelorder`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

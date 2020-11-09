@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {API_URL} from '../Utils';
 
 class ViewRestaurant extends Component {
   constructor(props) {

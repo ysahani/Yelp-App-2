@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import Posts from './Posts';
 import Pagination from './Pagination';
+import {API_URL} from '../Utils';
 
 class CustomerOrders extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class CustomerOrders extends Component {
     this.setState({
       loading: true,
     });
-    axios.post('http://localhost:3001/customer/customerorders', data)
+    axios.post(`${API_URL}/customer/customerorders`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -51,7 +52,7 @@ class CustomerOrders extends Component {
       items: val,
       name: this.props.name,
     };
-    axios.post('http://localhost:3001/customer/cancelorder', data)
+    axios.post(`${API_URL}/customer/cancelorder`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -71,7 +72,7 @@ class CustomerOrders extends Component {
       cName: name,
       filter: val,
     };
-    axios.post('http://localhost:3001/filtcustomerorder', data)
+    axios.post(`${API_URL}/filtcustomerorder`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

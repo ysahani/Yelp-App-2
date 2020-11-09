@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Dishes from './Dishes';
 import Pagination from '../CustomerPage/Pagination';
+import {API_URL} from '../Utils';
 
 class Menu extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class Menu extends Component {
       loading: true,
     });
     axios.defaults.headers.common.authorization = localStorage.getItem('token');
-    axios.post('http://localhost:3001/restaurant/menu', data)
+    axios.post(`${API_URL}/restaurant/menu`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

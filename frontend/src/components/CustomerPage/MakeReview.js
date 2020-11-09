@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import {API_URL} from '../Utils';
 
 class MakeReview extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class MakeReview extends Component {
       r_name: this.props.rName,
     };
 
-    axios.post('http://localhost:3001/customer/makereview', data)
+    axios.post(`${API_URL}/customer/makereview`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

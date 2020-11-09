@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import Things from './Things';
 import Pagination from '../CustomerPage/Pagination';
+import {API_URL} from '../Utils';
 
 class CustomerEvents extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class CustomerEvents extends Component {
     this.setState({
       loading: true,
     });
-    axios.post('http://localhost:3001/customer/customerevents', data)
+    axios.post(`${API_URL}/customer/customerevents`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -63,7 +64,7 @@ class CustomerEvents extends Component {
     const edata = {
       aEmail: email,
     };
-    axios.post('http://localhost:3001/customer/showRegistered', edata)
+    axios.post(`${API_URL}/customer/showRegistered`, edata)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -90,7 +91,7 @@ class CustomerEvents extends Component {
       asearch: search,
     };
     console.log(data.asearch);
-    axios.post('http://localhost:3001/customer/customerevent', data)
+    axios.post(`${API_URL}/customer/customerevent`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

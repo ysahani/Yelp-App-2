@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import {API_URL} from '../Utils';
 
 class ViewCustomer extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class ViewCustomer extends Component {
       cname: cName,
     };
 
-    axios.post('http://localhost:3001/getcustomeremail', data)
+    axios.post(`${API_URL}/getcustomeremail`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -28,7 +29,7 @@ class ViewCustomer extends Component {
         }
       });
 
-    axios.post('http://localhost:3001/restaurant/viewcustomer', data)
+    axios.post(`${API_URL}/restaurant/viewcustomer`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -46,7 +47,7 @@ class ViewCustomer extends Component {
     };
     console.log('DSAF');
     console.log(cEmail);
-    axios.post('http://localhost:3001/getcustomerurl', data)
+    axios.post(`${API_URL}/getcustomerurl`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

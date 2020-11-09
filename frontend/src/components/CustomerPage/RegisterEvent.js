@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import {API_URL} from '../Utils';
 
 class RegisterEvent extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class RegisterEvent extends Component {
       aEmail: email,
       eName: eventName,
     };
-    axios.post('http://localhost:3001/customer/registerevent', data)
+    axios.post(`${API_URL}/customer/registerevent`, data)
       .then((response) => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import {API_URL} from '../Utils';
 
 class ViewCust extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class ViewCust extends Component {
         let data = {
             cname: results,
           };
-        axios.post('http://localhost:3001/restaurant/viewcustomer', data)
+        axios.post(`${API_URL}/restaurant/viewcustomer`, data)
         .then((response) => {
             console.log('Status Code : ', response.status);
             if (response.status === 200) {
@@ -36,7 +37,7 @@ class ViewCust extends Component {
             name: this.props.name,
             cname: results,
           };
-        axios.post('http://localhost:3001/customer/followuser', data)
+        axios.post(`${API_URL}/customer/followuser`, data)
         .then((response) => {
             console.log('Status Code : ', response.status);
             if (response.status === 200) {
