@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with MongoDB, Express, React, and Node.
 
 ## How to Run the Project
 Open three terminals within the project and do the following steps.
